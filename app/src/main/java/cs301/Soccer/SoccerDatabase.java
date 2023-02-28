@@ -163,35 +163,35 @@ public class SoccerDatabase implements SoccerDB {
     @Override
     public SoccerPlayer playerIndex(int idx, String teamName) {
         //In progress.
-        String curTeam = "dur";
-        int teamPlayCount = 0;
-        SoccerPlayer current = null;
-        Enumeration<SoccerPlayer> arr = database.elements();
-        if(numPlayers(teamName) > idx && numPlayers(teamName) != 0){
-            return null;
-        }
-        else{
-            if(teamName == null){
-                for(int i = 0; i < idx; i++) {
-                    current = arr.nextElement();
-                }
-                return getPlayer(current.getFirstName(), current.getLastName());
-            }
-            else{
+       if(teamName == null){
 
-                for(int i = 0; i < database.size(); i++) {
-                    current = arr.nextElement();
-                    if(current.getTeamName().equals(teamName)){
-                        teamPlayCount++;
-                        if(teamPlayCount >= idx){
-                            return getPlayer(current.getFirstName(), current.getLastName());
-                        }
-                    }
-                }
-                return null;
-            }
+           Enumeration<SoccerPlayer> arr = database.elements();
+           SoccerPlayer current = arr.nextElement();
+           for(int i = 0; i < idx; i++) {
+               current = arr.nextElement();
+           }
+           return current;
+       }
 
-        }
+       else{
+           String curTeam;
+           int playerCount = 0;
+           //int teamLimit = numPlayers(teamName);
+
+           SoccerPlayer current = null;
+           Enumeration<SoccerPlayer> arr = database.elements();
+           for(int i = 0; arr.hasMoreElements(); i++) {
+               current = arr.nextElement();
+               curTeam = current.getTeamName();
+               if(curTeam.equals(teamName)){
+                   if(playerCount == idx){
+                       return current;
+                   }
+                   playerCount++;
+               }
+           }
+           return current;
+       }
     }
 
     /**
