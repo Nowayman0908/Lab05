@@ -3,6 +3,9 @@ package cs301.Soccer;
 import android.util.Log;
 import cs301.Soccer.soccerPlayer.SoccerPlayer;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.*;
 
 /**
@@ -176,7 +179,6 @@ public class SoccerDatabase implements SoccerDB {
        else{
            String curTeam;
            int playerCount = 0;
-           //int teamLimit = numPlayers(teamName);
 
            SoccerPlayer current = null;
            Enumeration<SoccerPlayer> arr = database.elements();
@@ -202,7 +204,17 @@ public class SoccerDatabase implements SoccerDB {
     // read data from file
     @Override
     public boolean readData(File file) {
-        return file.exists();
+        file = new File("PlayerData.txt");
+        try {
+            FileInputStream input = new FileInputStream(file);
+            PrintWriter print = new PrintWriter(file);
+            print.println((player.getFirstName()));
+            return true;
+        }
+        catch(Exception e){
+            System.out.println("The file is closed.");
+            return false;
+        }
     }
 
     /**
@@ -213,7 +225,18 @@ public class SoccerDatabase implements SoccerDB {
     // write data to file
     @Override
     public boolean writeData(File file) {
-        return false;
+        file = new File("PlayerData.txt");
+        try {
+            PrintWriter pw = new PrintWriter(file);
+            pw.write("Placeholder");
+
+            pw.close();
+            return true;
+        }
+        catch(Exception e){
+            System.out.println("The file is closed.");
+            return false;
+        }
     }
 
     /**

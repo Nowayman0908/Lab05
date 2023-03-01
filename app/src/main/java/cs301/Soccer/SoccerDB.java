@@ -3,6 +3,9 @@ package cs301.Soccer;
 import cs301.Soccer.soccerPlayer.SoccerPlayer;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.HashSet;
 
 /**
